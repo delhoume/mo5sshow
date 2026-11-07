@@ -18,8 +18,10 @@ Run `bash build.sh` to copy the index and its referenced images into the disk
 image. On the MO5, the index is reloaded from disk after each slideshow cycle.
 An unreadable, empty or invalid index is reported on screen and retried.
 
-<img width="788" height="621" alt="image" src="https://github.com/user-attachments/assets/831fa9ed-b2f1-47ea-95df-68e0f07fc180" />
+<img width="372" height="288" alt="image" src="https://github.com/user-attachments/assets/831fa9ed-b2f1-47ea-95df-68e0f07fc180" />
 
-<img width="744" height="577" alt="image" src="https://github.com/user-attachments/assets/64010d84-f5a7-4808-9a47-d70e3cbddc03" />
+<img width="372" height="288" alt="image" src="https://github.com/user-attachments/assets/64010d84-f5a7-4808-9a47-d70e3cbddc03" />
 
+≈<img width="372" height="288" alt="image" src="https://github.com/user-attachments/assets/5ff1fb26-fbe8-44f3-9efa-ca028baf4fdf" />
+<img width="372" height="288" alt="image" src="https://github.com/user-attachments/assets/66f37368-f7ea-4382-9dfd-26c79536d20a" />
 
