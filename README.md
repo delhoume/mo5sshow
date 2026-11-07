@@ -9,6 +9,9 @@ LENA.M5Z=4
 BIRDS.M5Z=8
 ```
 
+Images in the mo5z format can be generated using tools available at https://github.com/fstark/png2mo5
+and are very high quality given the Thomson MO5 graphic constrains.
+
 Blank lines and lines beginning with `#` are ignored. Names may contain
 letters, digits, underscores or hyphens; the index may contain up to 1024
 bytes. Filenames are case-insensitive, and image assets in `assets/` must use
