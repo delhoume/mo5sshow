@@ -102,7 +102,7 @@ void showImageFromMemory(const unsigned char *imagedata) {
 }
 
 unsigned char showImageFromDisk(const char *filename) {
-  Reader *reader = GetFileReader(filename, MODE_8BIT);
+  Reader *reader = GetFileReader(filename);
   unsigned char result;
 
   if (!reader) {

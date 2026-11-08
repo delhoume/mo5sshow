@@ -3,3 +3,5 @@
 /.vscode
 tools/fdfs
 output/dcmoto.bmp
+dcmoto.ini
+output/mo5show.fd.zip

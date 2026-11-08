@@ -58,7 +58,7 @@ int slideIndexNext(SlideEntry *entry) {
 }
 
 unsigned char slideIndexLoad(void) {
-  Reader *reader = GetFileReader("SLIDE.INI", MODE_8BIT);
+  Reader *reader = GetFileReader("SLIDE.INI");
   SlideEntry entry;
   int status;
   unsigned int count = 0;

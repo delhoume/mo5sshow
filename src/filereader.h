@@ -1,15 +1,14 @@
 #ifndef FILE_READER_H
 #define FILE_READER_H
 
-
 #include "reader.h"
+
 
 typedef struct {
   const char *filename;
-  BitMode mode;
-} FileConfig;
+ } FileConfig;
 
-Reader *GetFileReader(const char *filename, BitMode mode);
+Reader *GetFileReader(const char *filename);
 unsigned char readThomsonSector(unsigned char drive, unsigned char track,
                                 unsigned char sector, void *buffer);
 int FileReaderHasError(void);

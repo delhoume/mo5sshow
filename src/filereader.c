@@ -23,7 +23,6 @@ static unsigned char fileErrorSite;
 unsigned char fileErrorTrack;
 unsigned char fileErrorSector;
 static unsigned char fileReadEof;
-static BitMode fileReaderMode;
 static unsigned char fatTable[160];
 static unsigned char fatTableLoaded;
 
@@ -91,9 +90,7 @@ static void InitFileReader(void *config) {
     fileName[8 + i] = ' ';
   }
   fileName[11] = '\0';
-  fileReaderMode = fconfig->mode;
-  SetReaderMode(fileReaderMode);
-  fatTableLoaded = 0;
+   fatTableLoaded = 0;
   if (!findFileSector((const char *)fileName)) {
     return;
   }
@@ -127,7 +124,6 @@ static void resetFileReader(void) {
   bytesInCurrentSector = 0;
   fileReadError = 0;
   fileReadEof = 0;
-  SetReaderMode(fileReaderMode);
 }
 
 static int eofFileReader(void) {
@@ -173,8 +169,8 @@ static Reader FileReader = {
     nextByteFileReader, closeFileReader,     readBytesFileReader,
 };
 
-Reader *GetFileReader(const char *filename, BitMode mode) {
-  FileConfig config = {filename, mode};
+Reader *GetFileReader(const char *filename) {
+  FileConfig config = {filename};
   FileReader.init(&config);
   if (!fileNameValid) {
     return 0;

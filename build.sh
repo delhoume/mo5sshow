@@ -3,9 +3,8 @@ set -e
 mkdir -p build/disk
 
 cmoc --thommo --limit=9e00 -o build/MO5SHOW.BIN -Isrc -Itools/sdk_mo5 -Itools/sdk_mo5/include \
-  src/main.c src/slide_index.c src/mo5_image.c src/dzx0.c src/filereader.c tools/reader.c \
-  tools/sdk_mo5/src/mo5_video.c tools/sdk_mo5/src/mo5_font8.c \
-  tools/sdk_mo5/src/mo5_sprite_bg.c
+  src/main.c src/slide_index.c src/mo5_image.c src/dzx0.c src/filereader.c src/reader.c \
+  -Ltools/sdk_mo5/lib -lsdk_mo5
 
 
 if [ ! -x tools/fdfs ] || [ tools/src/fdfs.c -nt tools/fdfs ]; then
