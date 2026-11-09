@@ -20,8 +20,8 @@ static unsigned int read_bytes(unsigned char *dst, unsigned int count) {
 static void close_reader(void) { closes++; }
 static Reader reader = {0, 0, eof, 0, close_reader, read_bytes};
 
-Reader *GetFileReader(const char *name, BitMode mode) {
-  if (fail_open || strcmp(name, "SLIDE.INI") || mode != MODE_8BIT) return 0;
+Reader *GetFileReader(const char *name) {
+  if (fail_open || strcmp(name, "SLIDE.INI")) return 0;
   position = 0;
   return &reader;
 }
@@ -74,6 +74,26 @@ int main(void) {
   if (slideIndexLoad()) return 14;
   fail_open = 0;
   if (!slideIndexLoad() || slideIndexNext(&entry) != 1) return 15;
+  input("TITLE=My Show\nLENA.M5Z=4|A caption|An author\nBIRDS.M5Z=5|Only caption\nA.M5Z=6||Just author\nB.M5Z=7\n");
+  if (!slideIndexLoad() || strcmp(slideIndexTitle(), "My Show")) return 17;
+  if (slideIndexNext(&entry) != 1 || strcmp(entry.caption, "A caption") ||
+      strcmp(entry.author, "An author") || entry.seconds != 4) return 18;
+  if (slideIndexNext(&entry) != 1 || strcmp(entry.caption, "Only caption") ||
+      entry.author[0]) return 19;
+  if (slideIndexNext(&entry) != 1 || entry.caption[0] ||
+      strcmp(entry.author, "Just author") || entry.seconds != 6) return 20;
+  if (slideIndexNext(&entry) != 1 || entry.caption[0] || entry.author[0])
+    return 21;
+  input("A.M5Z=4|-|ignored\nB.M5Z=4\n");
+  if (!slideIndexLoad() || slideIndexNext(&entry) != 1 || entry.showInfo ||
+      entry.caption[0] || entry.author[0]) return 25;
+  if (slideIndexNext(&entry) != 1 || !entry.showInfo) return 26;
+  input("A.M5Z=4\n");
+  if (!slideIndexLoad() || slideIndexTitle()[0]) return 22;
+  input("A.M5Z=|cap\n");
+  if (slideIndexLoad()) return 23;
+  input("A.M5Z=4|0123456789012345678901234567890123456789X\n");
+  if (slideIndexLoad()) return 24;
   puts("Slideshow index parsing and error handling passed");
   return 0;
 }

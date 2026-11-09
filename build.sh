@@ -3,7 +3,7 @@ set -e
 mkdir -p build/disk
 
 cmoc --thommo --limit=9e00 -o build/MO5SHOW.BIN -Isrc -Itools/sdk_mo5 -Itools/sdk_mo5/include \
-  src/main.c src/slide_index.c src/mo5_image.c src/dzx0.c src/filereader.c src/reader.c \
+  src/main.c src/slide_index.c src/mo5_image.c src/dzx0.c src/filereader.c src/reader.c src/drawtext.c  \
   -Ltools/sdk_mo5/lib -lsdk_mo5
 
 
@@ -17,7 +17,8 @@ images=()
 while IFS= read -r line || [ -n "$line" ]; do
   line="${line%$'\r'}"
   case "$line" in ''|\#*) continue ;; esac
-  if [[ ! "$line" =~ ^([A-Za-z0-9_-]{1,8})\.[Mm]5[Zz]=([0-9]{1,3})$ ]]; then
+  case "$line" in [Tt][Ii][Tt][Ll][Ee]=*) continue ;; esac
+  if [[ ! "$line" =~ ^([A-Za-z0-9_-]{1,8})\.[Mm]5[Zz]=([0-9]{1,3})(\|[^|]*(\|.*)?)?$ ]]; then
     echo "Invalid SLIDE.INI entry: $line" >&2
     exit 1
   fi
